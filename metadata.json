@@ -1,0 +1,6 @@
+{
+  "name": "Digital Control Center",
+  "description": "An editorial bento-grid personal digital launcher, command center, private vault, and quick workspace access.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
