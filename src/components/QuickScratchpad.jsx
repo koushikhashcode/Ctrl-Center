@@ -19,6 +19,7 @@ import {
   RefreshCw,
 } from "lucide-react";
 import { useTheme } from "../context/ThemeContext";
+import "./QuickScratchpad.css";
 const DEFAULT_NOTES = [
   {
     id: "1",
@@ -291,72 +292,39 @@ export const QuickScratchpad = () => {
   // ==========================================
 
   const getContainerClasses = () => {
-    return `p-5 sm:p-6 flex flex-col justify-between h-full relative transition-colors overflow-y-auto overflow-x-hidden scrollbar-none ${
-      isDark ? "bg-[#18181B] text-white" : "bg-[#FFFFFF] text-[#171717]"
-    }`;
+    return `scratchpad-container ${isDark ? "theme-dark" : "theme-light"}`;
   };
 
   const getSaveBtnClasses = () => {
-    const base =
-      "group px-2.5 py-1.5 rounded-md border-2 font-mono text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 shadow-sm active:translate-y-0.5";
-    if (saveStatus === "saving") {
-      return `${base} bg-[#F25C23] text-white border-[#F25C23]`;
-    }
-    if (saveStatus === "unsaved") {
-      return `${base} bg-[#F25C23] hover:bg-[#d94a15] text-white border-[#171717] dark:border-stone-600 shadow-editorial-sm animate-pulse`;
-    }
-    return isDark
-      ? `${base} bg-[#27272A] border-[#3F3F46] hover:bg-[#F25C23] hover:text-white text-stone-200`
-      : `${base} bg-[#F5F5F3] border-[#171717] hover:bg-[#F25C23] hover:text-white text-[#171717]`;
+    const base = "scratchpad-btn-base scratchpad-save-btn";
+    if (saveStatus === "saving") return `${base} status-saving`;
+    if (saveStatus === "unsaved") return `${base} status-unsaved ${isDark ? "theme-dark" : "theme-light"}`;
+    return `${base} status-saved ${isDark ? "theme-dark" : "theme-light"}`;
   };
 
   const getIconBtnClasses = (isActive = false) => {
-    const base =
-      "p-1.5 rounded-md border-2 transition-all cursor-pointer flex items-center gap-1 text-xs font-mono font-bold";
-    if (isActive) {
-      return `${base} bg-amber-500 text-black border-amber-500 shadow-sm`;
-    }
-    if (copied && !isActive) {
-      return `${base} bg-[#F25C23] text-white border-[#171717] dark:border-white`;
-    }
-    return isDark
-      ? `${base} bg-[#27272A] border-[#3F3F46] hover:bg-[#F25C23] hover:text-white text-stone-200`
-      : `${base} bg-[#F5F5F3] border-[#171717] hover:bg-[#F25C23] hover:text-white text-[#171717]`;
+    const base = "scratchpad-btn-base scratchpad-icon-btn";
+    if (isActive) return `${base} is-active`;
+    if (copied && !isActive) return `${base} copied ${isDark ? "theme-dark" : "theme-light"}`;
+    return `${base} ${isDark ? "theme-dark" : "theme-light"}`;
   };
 
   const getTabClasses = (isActive) => {
-    const base =
-      "flex items-center gap-1.5 px-2.5 py-1 rounded-md border text-xs font-bold transition-all cursor-pointer whitespace-nowrap";
-    if (isActive) {
-      return `${base} bg-[#F25C23] text-white border-[#F25C23] shadow-editorial-sm`;
-    }
-    return isDark
-      ? `${base} bg-[#27272A] text-stone-300 border-[#3F3F46] hover:border-[#F25C23]`
-      : `${base} bg-[#F5F5F3] text-[#171717] border-[#171717]/30 hover:border-[#171717]`;
+    const base = "scratchpad-tab";
+    if (isActive) return `${base} is-active`;
+    return `${base} ${isDark ? "theme-dark" : "theme-light"}`;
   };
 
   const getTitleInputClasses = (isLocked) => {
-    const base =
-      "w-full font-heading font-bold text-sm bg-transparent border-b pb-1 focus:outline-none transition-colors";
-    if (isLocked) {
-      return `${base} cursor-not-allowed opacity-80 border-amber-500/50`;
-    }
-    return isDark
-      ? `${base} text-white border-[#3F3F46] focus:border-[#F25C23]`
-      : `${base} text-[#171717] border-[#171717]/20 focus:border-[#F25C23]`;
+    const base = "scratchpad-title-input";
+    if (isLocked) return `${base} is-locked`;
+    return `${base} ${isDark ? "theme-dark" : "theme-light"}`;
   };
 
   const getEditorClasses = (isLocked) => {
-    const base =
-      "w-full min-h-[150px] p-3 rounded-lg border-2 font-mono text-xs leading-relaxed resize-none focus:outline-none transition-colors overflow-hidden";
-    if (isLocked) {
-      return isDark
-        ? `${base} bg-[#202023] border-amber-500/40 text-stone-300 cursor-not-allowed select-text`
-        : `${base} bg-[#F0EFF0] border-amber-500/40 text-[#171717] cursor-not-allowed select-text`;
-    }
-    return isDark
-      ? `${base} bg-[#27272A] border-[#3F3F46] text-stone-200 placeholder-stone-500 focus:border-[#F25C23]`
-      : `${base} bg-[#F5F5F3] border-[#171717] text-[#171717] placeholder-[#171717]/50 focus:border-[#F25C23]`;
+    const base = "scratchpad-editor";
+    if (isLocked) return `${base} is-locked ${isDark ? "theme-dark" : "theme-light"}`;
+    return `${base} ${isDark ? "theme-dark" : "theme-light"}`;
   };
 
   // ==========================================
@@ -366,23 +334,19 @@ export const QuickScratchpad = () => {
     <div className={getContainerClasses()}>
       {/* Header Section */}
       <div>
-        <div
-          className={`flex flex-wrap items-center justify-between gap-2 border-b-2 pb-3 mb-3 ${isDark ? "border-[#3F3F46]" : "border-[#171717]"}`}
-        >
+        <div className={`scratchpad-header-border ${isDark ? "theme-dark" : "theme-light"}`}>
           {/* Title */}
-          <div className="flex items-center gap-2">
-            <div className="bg-[#171717] text-[#F25C23] p-1.5 rounded-md border border-[#3F3F46]">
-              <Edit3 className="w-5 h-5 text-[#F25C23]" />
+          <div className="scratchpad-title-wrapper">
+            <div className="scratchpad-title-icon-box">
+              <Edit3 className="w-5 h-5" />
             </div>
-            <h2
-              className={`font-heading text-2xl sm:text-3xl font-extrabold tracking-wide ${isDark ? "text-white" : "text-[#171717]"}`}
-            >
+            <h2 className={`scratchpad-title ${isDark ? "theme-dark" : "theme-light"}`}>
               SCRATCHPAD
             </h2>
           </div>
 
           {/* Action Buttons Toolbar */}
-          <div className="flex items-center gap-1.5 flex-wrap">
+          <div className="scratchpad-toolbar">
             {/* MANUAL SAVE TO BACKEND BUTTON */}
             <button
               onClick={handleManualSave}
@@ -456,7 +420,7 @@ export const QuickScratchpad = () => {
         </div>
 
         {/* Note Tabs */}
-        <div className="flex items-center gap-1.5 overflow-x-auto pb-2 mb-3 scrollbar-none">
+        <div className="scratchpad-tabs-container">
           {notes.map((note) => {
             const isActive = note.id === activeNoteId;
             return (
@@ -528,10 +492,8 @@ export const QuickScratchpad = () => {
         />
       </div>
 
-      {/* Footer Info & Backend Persistence Status */}
-      <div
-        className={`pt-3 border-t-2 mt-2 flex flex-wrap items-center justify-between gap-2 text-[11px] font-mono ${isDark ? "border-[#3F3F46] text-stone-400" : "border-[#171717] text-[#171717]/70"}`}
-      >
+        {/* Footer Info & Backend Persistence Status */}
+      <div className={`scratchpad-footer ${isDark ? "theme-dark" : "theme-light"}`}>
         <div className="flex items-center gap-2 flex-wrap">
           <span>{wordCount} words</span>
           <span>•</span>
@@ -539,7 +501,7 @@ export const QuickScratchpad = () => {
           <span>•</span>
           {/* Subtle Minute Auto-save Checkbox */}
           <label
-            className="inline-flex items-center gap-1 cursor-pointer opacity-70 hover:opacity-100 transition-opacity select-none text-[10px]"
+            className="scratchpad-autosave-label"
             title={
               isAutosaveEnabled ? "Auto-save is active" : "Auto-save is off"
             }
@@ -548,13 +510,13 @@ export const QuickScratchpad = () => {
               type="checkbox"
               checked={isAutosaveEnabled}
               onChange={(e) => setIsAutosaveEnabled(e.target.checked)}
-              className="w-3 h-3 accent-[#F25C23] cursor-pointer rounded-sm"
+              className="scratchpad-autosave-checkbox"
             />
             <span
               className={
                 isAutosaveEnabled
                   ? "text-[#F25C23] font-semibold"
-                  : "text-stone-400"
+                  : "opacity-70"
               }
             >
               Auto-save

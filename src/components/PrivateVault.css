@@ -1,0 +1,214 @@
+/* ==========================================
+   COMPONENT: PrivateVault
+   ========================================== */
+
+.private-vault-container {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  transition: color 0.3s, background-color 0.3s;
+}
+
+@media (min-width: 640px) {
+  .private-vault-container {
+    padding: 1.5rem;
+  }
+}
+
+.private-vault-container.theme-light {
+  background-color: #FFFFFF;
+  color: #171717;
+}
+
+.private-vault-container.theme-dark {
+  background-color: #18181B;
+  color: white;
+}
+
+/* Header */
+.private-vault-header-block {
+  margin-top: 0.25rem;
+}
+
+.private-vault-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom-width: 2px;
+  border-bottom-style: solid;
+  padding-bottom: 0.75rem;
+  margin-bottom: 0.625rem;
+}
+
+.private-vault-header.theme-light {
+  border-color: #171717;
+}
+
+.private-vault-header.theme-dark {
+  border-color: #3F3F46;
+}
+
+.private-vault-title-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.private-vault-icon-wrapper {
+  background-color: #171717;
+  color: #F25C23;
+  padding: 0.375rem;
+  border-radius: 0.5rem;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgba(242, 92, 35, 0.4);
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.private-vault-title-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.private-vault-title {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  line-height: 1;
+}
+
+@media (min-width: 640px) {
+  .private-vault-title {
+    font-size: 1.5rem;
+  }
+}
+
+.private-vault-title.theme-light {
+  color: #171717;
+}
+
+.private-vault-title.theme-dark {
+  color: white;
+}
+
+.private-vault-subtitle {
+  font-size: 0.625rem; /* 10px */
+  font-family: var(--font-mono);
+  color: #F25C23;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+}
+
+.private-vault-lock-btn {
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  background-color: #171717;
+  color: #F25C23;
+  padding: 0.375rem 0.625rem;
+  border-radius: 0.375rem;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #F25C23;
+  transition: all 0.2s;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.private-vault-lock-btn:hover {
+  background-color: #F25C23;
+  color: white;
+}
+
+.private-vault-desc {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  line-height: 1.375;
+  font-weight: 500;
+}
+
+.private-vault-desc.theme-light {
+  color: rgba(23, 23, 23, 0.8);
+}
+
+.private-vault-desc.theme-dark {
+  color: #d6d3d1;
+}
+
+/* Action Button Container */
+.private-vault-action-container {
+  margin-top: 0.25rem;
+  padding-top: 0.75rem;
+  border-top-width: 2px;
+  border-top-style: solid;
+}
+
+.private-vault-action-container.theme-light {
+  border-color: #171717;
+}
+
+.private-vault-action-container.theme-dark {
+  border-color: #3F3F46;
+}
+
+.private-vault-action-btn {
+  width: 100%;
+  background-color: #F25C23;
+  color: white;
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+  border-width: 2px;
+  border-style: solid;
+  border-color: #171717;
+  transition: all 0.2s;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  box-shadow: 6px 6px 0px 0px #171717;
+}
+
+.private-vault-action-container.theme-dark .private-vault-action-btn {
+  box-shadow: 6px 6px 0px 0px #3F3F46;
+}
+
+@media (min-width: 640px) {
+  .private-vault-action-btn {
+    font-size: 0.875rem;
+  }
+}
+
+.private-vault-action-btn:hover {
+  background-color: #FF5A1F;
+}
+
+.private-vault-action-btn.unlocked:active {
+  transform: translate(1px, 1px);
+}
+
+.private-vault-action-btn.locked:active {
+  transform: translate(2px, 2px);
+  box-shadow: none !important;
+}
+
+.private-vault-action-btn-icon {
+  width: 1rem;
+  height: 1rem;
+}
+
+.private-vault-action-btn-icon.locked {
+  stroke-width: 2.5;
+}

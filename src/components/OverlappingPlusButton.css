@@ -1,0 +1,63 @@
+/* ==========================================
+   COMPONENT: OverlappingPlusButton
+   ========================================== */
+
+.overlapping-plus-wrapper {
+  position: absolute;
+  top: 50%;
+  right: -1.25rem;
+  transform: translateY(-50%);
+  z-index: 30;
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .overlapping-plus-wrapper {
+    display: block;
+  }
+}
+
+.overlapping-plus-btn {
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 9999px;
+  background-color: #FFFFFF;
+  color: #171717;
+  border-width: 3px;
+  border-style: solid;
+  border-color: #171717;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease-out;
+  box-shadow: 10px 10px 0px 0px #171717;
+}
+
+@media (min-width: 640px) {
+  .overlapping-plus-btn {
+    width: 3rem;
+    height: 3rem;
+  }
+}
+
+.overlapping-plus-btn:hover {
+  background-color: #F25C23;
+  color: white;
+  transform: scale(1.1);
+}
+
+.overlapping-plus-btn:active {
+  transform: scale(0.95);
+}
+
+.overlapping-plus-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  stroke-width: 3;
+  transition: transform 0.3s;
+}
+
+.overlapping-plus-btn:hover .overlapping-plus-icon {
+  transform: rotate(90deg);
+}

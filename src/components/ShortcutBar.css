@@ -1,0 +1,131 @@
+/* ==========================================
+   COMPONENT: ShortcutBar
+   ========================================== */
+
+.shortcut-bar-footer {
+  width: 100%;
+  background-color: #171717;
+  color: white;
+  border-top-width: 3px;
+  border-top-style: solid;
+  border-color: #171717;
+  padding: 0.625rem 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  position: relative;
+  z-index: 20;
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  user-select: none;
+}
+
+@media (min-width: 640px) {
+  .shortcut-bar-footer {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+.shortcut-bar-left {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  overflow-x: auto;
+  padding-top: 0.125rem;
+  padding-bottom: 0.125rem;
+}
+
+.shortcut-bar-left::-webkit-scrollbar {
+  display: none;
+}
+
+.shortcut-bar-hotkeys-label {
+  color: #F25C23;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  margin-right: 0.25rem;
+  flex-shrink: 0;
+}
+
+.shortcut-bar-hotkeys-icon {
+  width: 0.875rem;
+  height: 0.875rem;
+}
+
+.shortcut-bar-chip {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  background-color: #222222;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgba(168, 168, 163, 0.3);
+  padding: 0.25rem 0.625rem;
+  border-radius: 0.375rem;
+  color: white;
+  white-space: nowrap;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.shortcut-bar-chip:hover {
+  background-color: #2e2e33;
+  border-color: #F25C23;
+  color: #F25C23;
+}
+
+.shortcut-bar-chip:active {
+  transform: scale(0.95);
+}
+
+.shortcut-bar-chip-text {
+  color: #d6d3d1;
+  font-size: 0.6875rem; /* 11px */
+  font-family: var(--font-sans);
+  font-weight: 600;
+}
+
+.shortcut-bar-chip:hover .shortcut-bar-chip-text {
+  color: white;
+}
+
+.shortcut-bar-right {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  color: #d6d3d1;
+  transition: color 0.2s;
+  cursor: pointer;
+  margin-left: auto;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  flex-shrink: 0;
+  background: transparent;
+  border: none;
+  padding: 0;
+}
+
+.shortcut-bar-right:hover {
+  color: #F25C23;
+}
+
+.shortcut-bar-help-icon {
+  width: 1rem;
+  height: 1rem;
+  color: #F25C23;
+}
+
+.shortcut-bar-help-text {
+  display: none;
+}
+
+@media (min-width: 640px) {
+  .shortcut-bar-help-text {
+    display: inline;
+  }
+}

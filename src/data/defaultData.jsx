@@ -93,20 +93,20 @@ export const INITIAL_MUSIC_FOLDERS = [
         ]
     },
     {
-        id: 'mf-energy',
-        name: 'High Energy & Workout',
-        category: 'Workout / Pump',
+        id: 'mf-hindi',
+        name: 'Hindi',
+        category: 'hindi classical',
         iconName: 'Flame',
         color: '#F25C23',
         description: 'Upbeat electro, synthpop anthems & adrenaline motivation',
         songs: [
             {
-                id: 'energy-1',
-                title: 'Starboy',
-                artist: 'The Weeknd ft. Daft Punk',
-                duration: '3:50',
-                url: 'https://www.youtube.com/watch?v=34Na4j8AVgA',
-                genre: 'Synthpop'
+                id: 'hindi-1',
+                title: 'Sehmi Hai Dhadkan',
+                artist: 'Arijit Singh',
+                duration: '2:43',
+                url: '/music/Sehmi_Hai_Dhadkan.mp3',
+                genre: 'Hindi'
             },
             {
                 id: 'energy-2',

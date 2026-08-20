@@ -24,6 +24,7 @@ import {
   INITIAL_RECENTS,
   INITIAL_VAULT_DOCS,
 } from "../data/defaultData";
+import "./AppShell.css";
 /**
  * ==========================================
  * MASTER LAYOUT COMPONENT: AppShell
@@ -335,16 +336,16 @@ export const AppShell = () => {
    */
   return (
     <div
-      className={`min-h-screen p-2 sm:p-5 lg:p-8 flex items-center justify-center font-sans relative overflow-x-hidden selection:bg-[#F25C23] selection:text-white transition-colors ${isDark ? "bg-[#0A0A0C]" : "bg-[#E5E5E2]"}`}
+      className={`app-shell-container ${isDark ? "theme-dark" : "theme-light"}`}
     >
       {/* Background Stage Ambient Glow */}
       <div
-        className={`absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] bg-gradient-to-tr pointer-events-none rounded-full blur-3xl ${isDark ? "from-[#F25C23]/15 via-[#FF5A1F]/10 to-transparent" : "from-[#F25C23]/10 via-[#FF5A1F]/5 to-transparent"}`}
+        className={`app-shell-ambient-glow ${isDark ? "theme-dark" : "theme-light"}`}
       />
 
       {/* Main Framed Application Canvas */}
       <div
-        className={`w-full max-w-[1440px] border-4 rounded-[24px] sm:rounded-[32px] overflow-hidden relative z-10 flex flex-col my-auto transition-colors ${isDark ? "bg-[#121214] border-[#3F3F46] shadow-[0_25px_60px_-15px_rgba(0,0,0,0.95)]" : "bg-[#F5F5F3] border-[#171717] shadow-[0_25px_60px_-15px_rgba(0,0,0,0.9)]"}`}
+        className={`app-shell-main-canvas ${isDark ? "theme-dark" : "theme-light"}`}
       >
         {/* Top Navigation */}
         <TopNavigation
@@ -356,18 +357,18 @@ export const AppShell = () => {
         />
 
         {/* Master Asymmetric Bento Grid Canvas */}
-        <main className="p-3 sm:p-5 lg:p-6 space-y-4 sm:space-y-5 flex-1">
+        <main className="app-shell-bento-canvas">
           {/* Active View / Breadcrumb Filter Header when a specific module tab is selected */}
           {activeTab !== "dashboard" && (
             <div
-              className={`p-3.5 px-4 sm:px-5 rounded-2xl border-3 flex flex-wrap items-center justify-between gap-3 animate-in fade-in duration-200 ${isDark ? "bg-[#18181B] border-[#3F3F46] text-white" : "bg-[#FFFFFF] border-[#171717] text-[#171717]"}`}
+              className={`app-shell-breadcrumb-header ${isDark ? "theme-dark" : "theme-light"}`}
             >
-              <div className="flex items-center gap-2.5">
-                <span className="w-2.5 h-2.5 rounded-full bg-[#F25C23] animate-ping" />
-                <span className="font-mono text-xs font-bold text-[#F25C23] uppercase tracking-wider">
+              <div className="app-shell-breadcrumb-left">
+                <span className="app-shell-ping-dot" />
+                <span className="app-shell-breadcrumb-label">
                   FOCUS VIEW //
                 </span>
-                <span className="font-heading text-sm sm:text-base font-extrabold uppercase">
+                <span className="app-shell-breadcrumb-title">
                   {activeTab === "launchpad" && "⚡ QUICK LAUNCHPAD"}
                   {activeTab === "vault" && "🔒 ENCRYPTED PRIVATE VAULT"}
                   {activeTab === "playlists" && "🎵 LO-FI BEATS & PLAYLISTS"}
@@ -377,12 +378,12 @@ export const AppShell = () => {
                 </span>
               </div>
 
-              <div className="flex items-center gap-2">
+              <div className="app-shell-breadcrumb-right">
                 <button
                   onClick={() => setActiveTab("dashboard")}
-                  className={`px-3 py-1.5 rounded-lg border-2 font-heading text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 shadow-sm active:translate-y-0.5 ${isDark ? "bg-[#27272A] border-[#3F3F46] hover:bg-[#F25C23] hover:text-white text-stone-200" : "bg-[#F5F5F3] border-[#171717] hover:bg-[#F25C23] hover:text-white text-[#171717]"}`}
+                  className={`app-shell-btn-overview ${isDark ? "theme-dark" : "theme-light"}`}
                 >
-                  <ArrowLeft className="w-3.5 h-3.5 text-[#F25C23] group-hover:text-white" />
+                  <ArrowLeft className="app-shell-btn-overview-icon" />
                   <span>OVERVIEW (ALL MODULES)</span>
                 </button>
               </div>
@@ -393,10 +394,10 @@ export const AppShell = () => {
           {activeTab === "dashboard" ? (
             <>
               {/* TOP BENTO SECTION: QUICK LAUNCH (Hero) + PRIVATE VAULT (Tall Vertical) */}
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-5 relative">
+              <div className="app-shell-grid-top">
                 {/* BLOCK A: QUICK LAUNCH (Hero Column - 8 Cols) */}
                 <section
-                  className={`lg:col-span-8 border-3 rounded-2xl overflow-hidden transition-colors ${isDark ? "border-[#3F3F46] shadow-editorial-dark bg-[#18181B]" : "border-[#171717] shadow-editorial bg-[#FFFFFF]"}`}
+                  className={`app-shell-block app-shell-block-a ${isDark ? "theme-dark" : "theme-light"}`}
                 >
                   <QuickLaunch
                     links={links}
@@ -415,7 +416,7 @@ export const AppShell = () => {
 
                 {/* BLOCK B: PRIVATE VAULT (Tall Vertical Right Column - 4 Cols) */}
                 <section
-                  className={`lg:col-span-4 border-3 rounded-2xl overflow-hidden relative transition-colors ${isDark ? "border-[#3F3F46] shadow-editorial-dark bg-[#18181B]" : "border-[#171717] shadow-editorial bg-[#FFFFFF]"}`}
+                  className={`app-shell-block app-shell-block-b relative ${isDark ? "theme-dark" : "theme-light"}`}
                 >
                   <PrivateVault
                     isUnlocked={isUnlockedVault}
@@ -432,10 +433,10 @@ export const AppShell = () => {
               </div>
 
               {/* BOTTOM BENTO SECTION: PLAYLISTS + TOOLS + SCRATCHPAD */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-4 sm:gap-5">
+              <div className="app-shell-grid-bottom">
                 {/* BLOCK C: YOUTUBE PLAYLISTS & FAVORITE TRACKS CUTOUT (4 Cols) */}
                 <section
-                  className={`md:col-span-1 lg:col-span-4 border-3 rounded-2xl overflow-hidden transition-colors ${isDark ? "border-[#3F3F46] shadow-editorial-dark bg-[#18181B]" : "border-[#171717] shadow-editorial bg-[#FFFFFF]"}`}
+                  className={`app-shell-block app-shell-block-c ${isDark ? "theme-dark" : "theme-light"}`}
                 >
                   <PlaylistPanel
                     playlists={playlists}
@@ -446,7 +447,7 @@ export const AppShell = () => {
 
                 {/* BLOCK D: TOOLS & WORKSPACE (4 Cols) */}
                 <section
-                  className={`md:col-span-1 lg:col-span-4 border-3 rounded-2xl overflow-hidden transition-colors ${isDark ? "border-[#3F3F46] shadow-editorial-dark bg-[#18181B]" : "border-[#171717] shadow-editorial bg-[#FFFFFF]"}`}
+                  className={`app-shell-block app-shell-block-d ${isDark ? "theme-dark" : "theme-light"}`}
                 >
                   <ToolsWorkspace
                     tools={tools}
@@ -457,7 +458,7 @@ export const AppShell = () => {
 
                 {/* BLOCK E: QUICK SCRATCHPAD (4 Cols) */}
                 <section
-                  className={`md:col-span-2 lg:col-span-4 border-3 rounded-2xl overflow-hidden transition-colors ${isDark ? "border-[#3F3F46] shadow-editorial-dark bg-[#18181B]" : "border-[#171717] shadow-editorial bg-[#FFFFFF]"}`}
+                  className={`app-shell-block app-shell-block-e ${isDark ? "theme-dark" : "theme-light"}`}
                 >
                   <QuickScratchpad />
                 </section>
@@ -465,7 +466,7 @@ export const AppShell = () => {
             </>
           ) : activeTab === "launchpad" ? (
             <section
-              className={`border-3 rounded-2xl overflow-hidden transition-colors ${isDark ? "border-[#3F3F46] shadow-editorial-dark bg-[#18181B]" : "border-[#171717] shadow-editorial bg-[#FFFFFF]"}`}
+              className={`app-shell-block ${isDark ? "theme-dark" : "theme-light"}`}
             >
               <QuickLaunch
                 links={links}
@@ -483,7 +484,7 @@ export const AppShell = () => {
             </section>
           ) : activeTab === "vault" ? (
             <section
-              className={`border-3 rounded-2xl overflow-hidden relative transition-colors ${isDark ? "border-[#3F3F46] shadow-editorial-dark bg-[#18181B]" : "border-[#171717] shadow-editorial bg-[#FFFFFF]"}`}
+              className={`app-shell-block relative ${isDark ? "theme-dark" : "theme-light"}`}
             >
               <PrivateVault
                 isUnlocked={isUnlockedVault}
@@ -494,7 +495,7 @@ export const AppShell = () => {
             </section>
           ) : activeTab === "playlists" ? (
             <section
-              className={`border-3 rounded-2xl overflow-hidden transition-colors ${isDark ? "border-[#3F3F46] shadow-editorial-dark bg-[#18181B]" : "border-[#171717] shadow-editorial bg-[#FFFFFF]"}`}
+              className={`app-shell-block ${isDark ? "theme-dark" : "theme-light"}`}
             >
               <PlaylistPanel
                 playlists={playlists}
@@ -504,7 +505,7 @@ export const AppShell = () => {
             </section>
           ) : activeTab === "tools" ? (
             <section
-              className={`border-3 rounded-2xl overflow-hidden transition-colors ${isDark ? "border-[#3F3F46] shadow-editorial-dark bg-[#18181B]" : "border-[#171717] shadow-editorial bg-[#FFFFFF]"}`}
+              className={`app-shell-block ${isDark ? "theme-dark" : "theme-light"}`}
             >
               <ToolsWorkspace
                 tools={tools}
@@ -514,7 +515,7 @@ export const AppShell = () => {
             </section>
           ) : activeTab === "scratchpad" ? (
             <section
-              className={`border-3 rounded-2xl overflow-hidden transition-colors ${isDark ? "border-[#3F3F46] shadow-editorial-dark bg-[#18181B]" : "border-[#171717] shadow-editorial bg-[#FFFFFF]"}`}
+              className={`app-shell-block ${isDark ? "theme-dark" : "theme-light"}`}
             >
               <QuickScratchpad />
             </section>

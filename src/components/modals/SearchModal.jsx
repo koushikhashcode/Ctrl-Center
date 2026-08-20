@@ -8,6 +8,8 @@ import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Search, X, ExternalLink, CornerDownLeft } from 'lucide-react';
 import { useTheme } from '../../context/ThemeContext';
+import './SharedModals.css';
+
 export const SearchModal = ({ isOpen, onClose, links, playlists, tools, documents, onOpenLink, onOpenPlaylist, onOpenTool, onOpenVault })=>{
     const [query, setQuery] = useState('');
     const inputRef = useRef(null);
@@ -93,69 +95,45 @@ export const SearchModal = ({ isOpen, onClose, links, playlists, tools, document
         }
     };
     return <AnimatePresence>
-      {isOpen && <motion.div initial={{
-        opacity: 0
-    }} animate={{
-        opacity: 1
-    }} exit={{
-        opacity: 0
-    }} transition={{
-        duration: 0.2
-    }} className="fixed inset-0 z-50 flex items-start justify-center pt-16 sm:pt-24 px-4 bg-black/80 backdrop-blur-xs" onClick={onClose}>
-          <motion.div initial={{
-        opacity: 0,
-        scale: 0.95,
-        y: -8
-    }} animate={{
-        opacity: 1,
-        scale: 1,
-        y: 0
-    }} exit={{
-        opacity: 0,
-        scale: 0.95,
-        y: -8
-    }} transition={{
-        type: 'spring',
-        stiffness: 420,
-        damping: 28
-    }} onClick={(e)=>e.stopPropagation()} data-lenis-prevent className={`border-4 rounded-2xl w-full max-w-xl overflow-hidden flex flex-col transition-colors ${isDark ? 'bg-[#18181B] border-[#3F3F46] text-white shadow-editorial-lg-dark' : 'bg-[#FFFFFF] border-[#171717] text-[#171717] shadow-editorial-lg'}`}>
+      {isOpen && <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }} className="modal-overlay modal-overlay-start" onClick={onClose}>
+          <motion.div initial={{ opacity: 0, scale: 0.95, y: -8 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.95, y: -8 }} transition={{ type: 'spring', stiffness: 420, damping: 28 }} onClick={(e)=>e.stopPropagation()} data-lenis-prevent className={`modal-container max-w-xl ${isDark ? 'theme-dark' : 'theme-light'}`} style={{display: 'flex', flexDirection: 'column'}}>
             { /* Search Header */ }
-            <div className={`p-4 flex items-center gap-3 border-b-2 ${isDark ? 'bg-[#121214] text-white border-[#3F3F46]' : 'bg-[#171717] text-white border-[#171717]'}`}>
+            <div className={`search-input-wrap ${isDark ? 'theme-dark' : 'theme-light'}`}>
               <Search className="w-5 h-5 text-[#F25C23] flex-shrink-0"/>
-              <input ref={inputRef} type="text" placeholder="Search links, playlists, workspace tools or documents..." value={query} onChange={(e)=>setQuery(e.target.value)} onKeyDown={handleInputKeyDown} className="w-full bg-transparent text-white placeholder-stone-400 font-sans font-bold text-base focus:outline-none"/>
-              <button onClick={onClose} className="p-1 text-stone-400 hover:text-white transition-colors cursor-pointer rounded hover:bg-white/10">
+              <input ref={inputRef} type="text" placeholder="Search links, playlists, workspace tools or documents..." value={query} onChange={(e)=>setQuery(e.target.value)} onKeyDown={handleInputKeyDown} className="search-input"/>
+              <button onClick={onClose} className="modal-close-btn" style={{padding: '0.25rem'}}>
                 <X className="w-5 h-5"/>
               </button>
             </div>
 
             { /* Search Results */ }
-            <div className="p-4 max-h-[60vh] overflow-y-auto space-y-4 font-sans text-sm">
-              {totalMatches === 0 ? <div className="text-center py-10">
+            <div className="search-results-area">
+              {totalMatches === 0 ? <div style={{textAlign: 'center', padding: '2.5rem 0'}}>
                   <p className={`font-mono text-sm ${isDark ? 'text-stone-400' : 'text-stone-500'}`}>
                     No matching shortcuts, tools, or documents found for "{query}".
                   </p>
                 </div> : <>
                   { /* Launch Links */ }
                   {matchingLinks.length > 0 && <div>
-                      <h4 className={`font-heading font-extrabold text-xs uppercase tracking-wider mb-2 pb-1 border-b ${isDark ? 'text-white border-[#3F3F46]' : 'text-[#171717] border-[#171717]/20'}`}>
+                      <h4 className={`search-group-title ${isDark ? 'theme-dark' : 'theme-light'}`}>
                         🚀 LAUNCH TILES ({matchingLinks.length})
                       </h4>
-                      <div className="space-y-1">
+                      <div className="space-y-1" style={{display: 'flex', flexDirection: 'column', gap: '0.25rem'}}>
                         {matchingLinks.map((link)=>{
         const itemIdx = flatResults.findIndex((r)=>r.id === `link-${link.id}`);
         const isSelected = selectedIndex === itemIdx;
         return <div key={link.id} onClick={()=>{
             onOpenLink(link);
             onClose();
-        }} onMouseEnter={()=>setSelectedIndex(itemIdx)} className={`p-2.5 border rounded-lg flex items-center justify-between cursor-pointer transition-colors font-semibold ${isSelected ? 'bg-[#F25C23] text-white border-[#F25C23] shadow-sm' : isDark ? 'bg-[#27272A] hover:bg-[#F25C23] hover:text-white border-[#3F3F46] text-white' : 'bg-[#F5F5F3] hover:bg-[#F25C23] hover:text-white border-[#171717] text-[#171717]'}`}>
-                              <div className="flex items-center gap-2 truncate">
-                                <span className="truncate">{link.name}</span>
-                                <span className={`font-mono text-[10px] uppercase px-1.5 py-0.5 rounded border ${isSelected ? 'bg-white/20 text-white border-white/40' : isDark ? 'bg-[#18181B] text-stone-300 border-[#3F3F46]' : 'bg-white text-stone-600 border-[#171717]/20'}`}>
+        }} onMouseEnter={()=>setSelectedIndex(itemIdx)} className={`search-result-item ${isSelected ? 'is-selected' : isDark ? 'theme-dark' : 'theme-light'}`}>
+                              <div style={{display: 'flex', alignItems: 'center', gap: '0.5rem', overflow: 'hidden'}}>
+                                <span style={{overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>{link.name}</span>
+                                <span className={`search-badge ${isSelected ? 'is-selected' : isDark ? 'theme-dark' : 'theme-light'}`}>
                                   {link.category}
                                 </span>
                               </div>
-                              <div className="flex items-center gap-2 flex-shrink-0">
-                                {link.shortcutKey && <kbd className={`font-mono text-xs px-1.5 py-0.5 rounded border font-bold ${isSelected ? 'bg-white text-[#171717] border-white' : isDark ? 'bg-[#18181B] text-[#F25C23] border-[#3F3F46]' : 'bg-white text-[#171717] border-[#171717]'}`}>
+                              <div style={{display: 'flex', alignItems: 'center', gap: '0.5rem', flexShrink: 0}}>
+                                {link.shortcutKey && <kbd className={`search-kbd ${isSelected ? 'is-selected' : isDark ? 'theme-dark' : 'theme-light'}`}>
                                     ⌘{link.shortcutKey}
                                   </kbd>}
                                 <ExternalLink className="w-3.5 h-3.5 opacity-60"/>
@@ -167,19 +145,19 @@ export const SearchModal = ({ isOpen, onClose, links, playlists, tools, document
 
                   { /* Workspace Tools */ }
                   {matchingTools.length > 0 && <div>
-                      <h4 className={`font-heading font-extrabold text-xs uppercase tracking-wider mb-2 pb-1 border-b ${isDark ? 'text-white border-[#3F3F46]' : 'text-[#171717] border-[#171717]/20'}`}>
+                      <h4 className={`search-group-title ${isDark ? 'theme-dark' : 'theme-light'}`}>
                         ⚙️ WORKSPACE TOOLS ({matchingTools.length})
                       </h4>
-                      <div className="space-y-1">
+                      <div className="space-y-1" style={{display: 'flex', flexDirection: 'column', gap: '0.25rem'}}>
                         {matchingTools.map((tool)=>{
         const itemIdx = flatResults.findIndex((r)=>r.id === `tool-${tool.id}`);
         const isSelected = selectedIndex === itemIdx;
         return <div key={tool.id} onClick={()=>{
             onOpenTool(tool);
             onClose();
-        }} onMouseEnter={()=>setSelectedIndex(itemIdx)} className={`p-2.5 border rounded-lg flex items-center justify-between cursor-pointer transition-colors font-semibold ${isSelected ? 'bg-[#F25C23] text-white border-[#F25C23] shadow-sm' : isDark ? 'bg-[#27272A] hover:bg-[#F25C23] hover:text-white border-[#3F3F46] text-white' : 'bg-[#F5F5F3] hover:bg-[#F25C23] hover:text-white border-[#171717] text-[#171717]'}`}>
-                              <span className="truncate">{tool.name}</span>
-                              <span className={`font-mono text-[10px] ${isSelected ? 'text-white font-bold' : 'opacity-80'}`}>
+        }} onMouseEnter={()=>setSelectedIndex(itemIdx)} className={`search-result-item ${isSelected ? 'is-selected' : isDark ? 'theme-dark' : 'theme-light'}`}>
+                              <span style={{overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>{tool.name}</span>
+                              <span className="search-badge" style={isSelected ? {color: 'white'} : {opacity: 0.8, background: 'transparent', border: 'none'}}>
                                 {tool.description}
                               </span>
                             </div>;
@@ -189,19 +167,19 @@ export const SearchModal = ({ isOpen, onClose, links, playlists, tools, document
 
                   { /* YouTube Playlists */ }
                   {matchingPlaylists.length > 0 && <div>
-                      <h4 className={`font-heading font-extrabold text-xs uppercase tracking-wider mb-2 pb-1 border-b ${isDark ? 'text-white border-[#3F3F46]' : 'text-[#171717] border-[#171717]/20'}`}>
+                      <h4 className={`search-group-title ${isDark ? 'theme-dark' : 'theme-light'}`}>
                         📺 YOUTUBE PLAYLISTS ({matchingPlaylists.length})
                       </h4>
-                      <div className="space-y-1">
+                      <div className="space-y-1" style={{display: 'flex', flexDirection: 'column', gap: '0.25rem'}}>
                         {matchingPlaylists.map((pl)=>{
         const itemIdx = flatResults.findIndex((r)=>r.id === `playlist-${pl.id}`);
         const isSelected = selectedIndex === itemIdx;
         return <div key={pl.id} onClick={()=>{
             onOpenPlaylist(pl);
             onClose();
-        }} onMouseEnter={()=>setSelectedIndex(itemIdx)} className={`p-2.5 border rounded-lg flex items-center justify-between cursor-pointer transition-colors font-semibold ${isSelected ? 'bg-[#F25C23] text-white border-[#F25C23] shadow-sm' : isDark ? 'bg-[#27272A] hover:bg-[#F25C23] hover:text-white border-[#3F3F46] text-white' : 'bg-[#F5F5F3] hover:bg-[#F25C23] hover:text-white border-[#171717] text-[#171717]'}`}>
-                              <span className="truncate">{pl.title}</span>
-                              <span className={`font-mono text-[10px] ${isSelected ? 'text-white font-bold' : 'opacity-80'}`}>
+        }} onMouseEnter={()=>setSelectedIndex(itemIdx)} className={`search-result-item ${isSelected ? 'is-selected' : isDark ? 'theme-dark' : 'theme-light'}`}>
+                              <span style={{overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>{pl.title}</span>
+                              <span className="search-badge" style={isSelected ? {color: 'white'} : {opacity: 0.8, background: 'transparent', border: 'none'}}>
                                 {pl.videoCount} videos
                               </span>
                             </div>;
@@ -211,19 +189,19 @@ export const SearchModal = ({ isOpen, onClose, links, playlists, tools, document
 
                   { /* Vault Documents */ }
                   {matchingDocs.length > 0 && <div>
-                      <h4 className={`font-heading font-extrabold text-xs uppercase tracking-wider mb-2 pb-1 border-b ${isDark ? 'text-white border-[#3F3F46]' : 'text-[#171717] border-[#171717]/20'}`}>
+                      <h4 className={`search-group-title ${isDark ? 'theme-dark' : 'theme-light'}`}>
                         🛡️ VAULT DOCUMENTS ({matchingDocs.length})
                       </h4>
-                      <div className="space-y-1">
+                      <div className="space-y-1" style={{display: 'flex', flexDirection: 'column', gap: '0.25rem'}}>
                         {matchingDocs.map((doc)=>{
         const itemIdx = flatResults.findIndex((r)=>r.id === `doc-${doc.id}`);
         const isSelected = selectedIndex === itemIdx;
         return <div key={doc.id} onClick={()=>{
             onOpenVault();
             onClose();
-        }} onMouseEnter={()=>setSelectedIndex(itemIdx)} className={`p-2.5 border rounded-lg flex items-center justify-between cursor-pointer transition-colors font-semibold ${isSelected ? 'bg-[#F25C23] text-white border-[#F25C23] shadow-sm' : isDark ? 'bg-[#27272A] hover:bg-[#F25C23] hover:text-white border-[#3F3F46] text-white' : 'bg-[#F5F5F3] hover:bg-[#F25C23] hover:text-white border-[#171717] text-[#171717]'}`}>
-                              <span className="truncate">{doc.title}</span>
-                              <span className={`font-mono text-[10px] uppercase ${isSelected ? 'text-white font-bold' : 'opacity-80'}`}>
+        }} onMouseEnter={()=>setSelectedIndex(itemIdx)} className={`search-result-item ${isSelected ? 'is-selected' : isDark ? 'theme-dark' : 'theme-light'}`}>
+                              <span style={{overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap'}}>{doc.title}</span>
+                              <span className="search-badge" style={isSelected ? {color: 'white'} : {opacity: 0.8, background: 'transparent', border: 'none'}}>
                                 {doc.category}
                               </span>
                             </div>;
@@ -234,11 +212,11 @@ export const SearchModal = ({ isOpen, onClose, links, playlists, tools, document
             </div>
 
             { /* Footer info */ }
-            <div className={`border-t-2 p-2.5 px-4 flex items-center justify-between text-[11px] font-mono ${isDark ? 'bg-[#121214] border-[#3F3F46] text-stone-300' : 'bg-[#F5F5F3] border-[#171717] text-[#171717]/70'}`}>
+            <div className={`search-footer ${isDark ? 'theme-dark' : 'theme-light'}`}>
               <span>
-                Navigate with <kbd className={`border px-1 rounded ${isDark ? 'bg-[#27272A] border-[#3F3F46] text-white' : 'bg-white border-[#171717] text-[#171717]'}`}>↑↓</kbd>
+                Navigate with <kbd className={`search-kbd ${isDark ? 'theme-dark' : 'theme-light'}`}>↑↓</kbd>
               </span>
-              <span className={`flex items-center gap-1 font-bold ${isDark ? 'text-white' : 'text-[#171717]'}`}>
+              <span style={{display: 'flex', alignItems: 'center', gap: '0.25rem', fontWeight: 'bold', color: isDark ? 'white' : '#171717'}}>
                 Press <CornerDownLeft className="w-3 h-3"/> to launch
               </span>
             </div>

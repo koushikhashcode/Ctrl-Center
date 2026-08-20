@@ -1,0 +1,351 @@
+/* ==========================================
+   COMPONENT: AppShell
+   ========================================== */
+
+.app-shell-container {
+  min-height: 100vh;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-sans);
+  position: relative;
+  overflow-x: hidden;
+  transition: color 0.3s, background-color 0.3s;
+}
+
+@media (min-width: 640px) {
+  .app-shell-container {
+    padding: 1.25rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .app-shell-container {
+    padding: 2rem;
+  }
+}
+
+.app-shell-container.theme-light {
+  background-color: #E5E5E2;
+}
+
+.app-shell-container.theme-light ::selection {
+  background-color: #F25C23;
+  color: white;
+}
+
+.app-shell-container.theme-dark {
+  background-color: #0A0A0C;
+}
+
+.app-shell-container.theme-dark ::selection {
+  background-color: #F25C23;
+  color: white;
+}
+
+/* Background Stage Ambient Glow */
+.app-shell-ambient-glow {
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 700px;
+  height: 500px;
+  border-radius: 9999px;
+  pointer-events: none;
+  filter: blur(64px);
+}
+
+.app-shell-ambient-glow.theme-light {
+  background: linear-gradient(to top right, rgba(242, 92, 35, 0.1), rgba(255, 90, 31, 0.05), transparent);
+}
+
+.app-shell-ambient-glow.theme-dark {
+  background: linear-gradient(to top right, rgba(242, 92, 35, 0.15), rgba(255, 90, 31, 0.1), transparent);
+}
+
+/* Main Framed Application Canvas */
+.app-shell-main-canvas {
+  width: 100%;
+  max-width: 1440px;
+  border-width: 4px;
+  border-style: solid;
+  border-radius: 24px;
+  overflow: hidden;
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  margin-top: auto;
+  margin-bottom: auto;
+  transition: border-color 0.3s, background-color 0.3s, box-shadow 0.3s;
+}
+
+@media (min-width: 640px) {
+  .app-shell-main-canvas {
+    border-radius: 32px;
+  }
+}
+
+.app-shell-main-canvas.theme-light {
+  background-color: #F5F5F3;
+  border-color: #171717;
+  box-shadow: 0 25px 60px -15px rgba(0,0,0,0.9);
+}
+
+.app-shell-main-canvas.theme-dark {
+  background-color: #121214;
+  border-color: #3F3F46;
+  box-shadow: 0 25px 60px -15px rgba(0,0,0,0.95);
+}
+
+/* Master Asymmetric Bento Grid Canvas */
+.app-shell-bento-canvas {
+  padding: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  flex: 1;
+}
+
+@media (min-width: 640px) {
+  .app-shell-bento-canvas {
+    padding: 1.25rem;
+    gap: 1.25rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .app-shell-bento-canvas {
+    padding: 1.5rem;
+  }
+}
+
+/* Active View / Breadcrumb Filter Header */
+.app-shell-breadcrumb-header {
+  padding: 0.875rem 1rem;
+  border-radius: 1rem;
+  border-width: 3px;
+  border-style: solid;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+@media (min-width: 640px) {
+  .app-shell-breadcrumb-header {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+}
+
+.app-shell-breadcrumb-header.theme-light {
+  background-color: #FFFFFF;
+  border-color: #171717;
+  color: #171717;
+}
+
+.app-shell-breadcrumb-header.theme-dark {
+  background-color: #18181B;
+  border-color: #3F3F46;
+  color: white;
+}
+
+.app-shell-breadcrumb-left {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+}
+
+.app-shell-ping-dot {
+  width: 0.625rem;
+  height: 0.625rem;
+  border-radius: 9999px;
+  background-color: #F25C23;
+  animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+.app-shell-breadcrumb-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #F25C23;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.app-shell-breadcrumb-title {
+  font-family: var(--font-heading);
+  font-size: 0.875rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+@media (min-width: 640px) {
+  .app-shell-breadcrumb-title {
+    font-size: 1rem;
+  }
+}
+
+.app-shell-breadcrumb-right {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.app-shell-btn-overview {
+  padding: 0.375rem 0.75rem;
+  border-radius: 0.5rem;
+  border-width: 2px;
+  border-style: solid;
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 700;
+  transition: all 0.2s;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+.app-shell-btn-overview:active {
+  transform: translateY(2px);
+}
+
+.app-shell-btn-overview.theme-light {
+  background-color: #F5F5F3;
+  border-color: #171717;
+  color: #171717;
+}
+
+.app-shell-btn-overview.theme-light:hover {
+  background-color: #F25C23;
+  color: white;
+}
+
+.app-shell-btn-overview.theme-dark {
+  background-color: #27272A;
+  border-color: #3F3F46;
+  color: #e5e5e5;
+}
+
+.app-shell-btn-overview.theme-dark:hover {
+  background-color: #F25C23;
+  color: white;
+}
+
+.app-shell-btn-overview-icon {
+  width: 0.875rem;
+  height: 0.875rem;
+  color: #F25C23;
+  transition: color 0.2s;
+}
+
+.app-shell-btn-overview:hover .app-shell-btn-overview-icon {
+  color: white;
+}
+
+/* Bento Grid System */
+.app-shell-grid-top {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 1rem;
+  position: relative;
+}
+
+@media (min-width: 640px) {
+  .app-shell-grid-top {
+    gap: 1.25rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .app-shell-grid-top {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+}
+
+.app-shell-grid-bottom {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+@media (min-width: 640px) {
+  .app-shell-grid-bottom {
+    gap: 1.25rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .app-shell-grid-bottom {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .app-shell-grid-bottom {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+}
+
+/* Block Wrappers */
+.app-shell-block {
+  border-width: 3px;
+  border-style: solid;
+  border-radius: 1rem;
+  overflow: hidden;
+  transition: border-color 0.3s, background-color 0.3s;
+}
+
+.app-shell-block.relative {
+  position: relative;
+}
+
+.app-shell-block.theme-light {
+  border-color: #171717;
+  background-color: #FFFFFF;
+  box-shadow: 6px 6px 0px 0px #171717;
+}
+
+.app-shell-block.theme-dark {
+  border-color: #3F3F46;
+  background-color: #18181B;
+  box-shadow: 6px 6px 0px 0px #3F3F46;
+}
+
+/* Specific Block Spans */
+@media (min-width: 1024px) {
+  .app-shell-block-a {
+    grid-column: span 8 / span 8;
+  }
+  .app-shell-block-b {
+    grid-column: span 4 / span 4;
+  }
+  .app-shell-block-c {
+    grid-column: span 4 / span 4;
+  }
+  .app-shell-block-d {
+    grid-column: span 4 / span 4;
+  }
+  .app-shell-block-e {
+    grid-column: span 4 / span 4;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .app-shell-block-c {
+    grid-column: span 1 / span 1;
+  }
+  .app-shell-block-d {
+    grid-column: span 1 / span 1;
+  }
+  .app-shell-block-e {
+    grid-column: span 2 / span 2;
+  }
+}

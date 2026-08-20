@@ -1,0 +1,326 @@
+/* ==========================================
+   COMPONENT: QuickLaunch
+   ========================================== */
+
+.quick-launch-container {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  position: relative;
+  transition: color 0.3s, background-color 0.3s;
+}
+
+@media (min-width: 640px) {
+  .quick-launch-container {
+    padding: 1.5rem;
+  }
+}
+
+.quick-launch-container.theme-light {
+  background-color: #FFFFFF;
+  color: #171717;
+}
+
+.quick-launch-container.theme-dark {
+  background-color: #18181B;
+  color: white;
+}
+
+/* Block Header */
+.quick-launch-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+  border-bottom-width: 2px;
+  border-bottom-style: solid;
+  padding-bottom: 1rem;
+}
+
+.quick-launch-header.theme-light {
+  border-color: #171717;
+}
+
+.quick-launch-header.theme-dark {
+  border-color: #3F3F46;
+}
+
+.quick-launch-title-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.quick-launch-icon-wrapper {
+  background-color: #171717;
+  color: #F25C23;
+  padding: 0.375rem;
+  border-radius: 0.375rem;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #3F3F46;
+}
+
+.quick-launch-title {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: 0.025em;
+}
+
+@media (min-width: 640px) {
+  .quick-launch-title {
+    font-size: 1.875rem;
+  }
+}
+
+.quick-launch-title.theme-light {
+  color: #171717;
+}
+
+.quick-launch-title.theme-dark {
+  color: white;
+}
+
+.quick-launch-count-badge {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 0.75rem;
+  padding: 0.125rem 0.5rem;
+  border-radius: 9999px;
+  margin-left: 0.25rem;
+  border-width: 1px;
+  border-style: solid;
+}
+
+.quick-launch-count-badge.theme-light {
+  background-color: #F5F5F3;
+  border-color: #171717;
+  color: #171717;
+}
+
+.quick-launch-count-badge.theme-dark {
+  background-color: #27272A;
+  border-color: #3F3F46;
+  color: #e5e5e5;
+}
+
+/* Action Button */
+.quick-launch-add-btn {
+  background-color: #171717;
+  color: white;
+  border-width: 2px;
+  border-style: solid;
+  border-color: #171717;
+  padding: 0.375rem 0.875rem;
+  border-radius: 0.5rem;
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  transition: all 0.2s;
+  cursor: pointer;
+  box-shadow: 3px 3px 0px 0px #171717;
+}
+
+@media (min-width: 640px) {
+  .quick-launch-add-btn {
+    font-size: 0.875rem;
+  }
+}
+
+.quick-launch-add-btn:hover {
+  background-color: #F25C23;
+}
+
+.quick-launch-add-btn:active {
+  transform: translate(1px, 1px);
+}
+
+/* Category Filter Chips */
+.quick-launch-filters {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+@media (min-width: 640px) {
+  .quick-launch-filters {
+    gap: 0.5rem;
+  }
+}
+
+.quick-launch-filters::-webkit-scrollbar {
+  display: none;
+}
+
+.quick-launch-filter-chip {
+  font-family: var(--font-condensed);
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.25rem 0.625rem;
+  border-radius: 0.375rem;
+  border-width: 1px;
+  border-style: solid;
+  transition: all 0.2s;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.quick-launch-filter-chip.active {
+  background-color: #F25C23;
+  color: white;
+  border-color: #F25C23;
+  box-shadow: 3px 3px 0px 0px #171717;
+}
+
+.quick-launch-filter-chip.active.theme-dark {
+  box-shadow: 3px 3px 0px 0px #3F3F46;
+}
+
+.quick-launch-filter-chip.inactive.theme-light {
+  background-color: #F5F5F3;
+  color: #171717;
+  border-color: transparent;
+}
+
+.quick-launch-filter-chip.inactive.theme-light:hover {
+  border-color: #171717;
+}
+
+.quick-launch-filter-chip.inactive.theme-dark {
+  background-color: #27272A;
+  color: #d6d3d1;
+  border-color: #3F3F46;
+}
+
+.quick-launch-filter-chip.inactive.theme-dark:hover {
+  border-color: #F25C23;
+}
+
+/* Grid of Launch Tiles */
+.quick-launch-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+  flex: 1;
+}
+
+@media (min-width: 640px) {
+  .quick-launch-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .quick-launch-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .quick-launch-grid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+
+/* Add Link Dashed Button Tile */
+.quick-launch-add-tile {
+  height: 7rem;
+  border-width: 2px;
+  border-style: dashed;
+  border-radius: 0.75rem;
+  padding: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  touch-action: manipulation;
+  user-select: none;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+@media (min-width: 640px) {
+  .quick-launch-add-tile {
+    height: 8rem;
+  }
+}
+
+.quick-launch-add-tile:hover {
+  border-color: #F25C23;
+}
+
+.quick-launch-add-tile.theme-light {
+  background-color: #F5F5F3;
+  border-color: #171717;
+}
+
+.quick-launch-add-tile.theme-light:hover {
+  background-color: #E8E8E5;
+}
+
+.quick-launch-add-tile.theme-dark {
+  background-color: #27272A;
+  border-color: #3F3F46;
+}
+
+.quick-launch-add-tile.theme-dark:hover {
+  background-color: #3F3F46;
+}
+
+.quick-launch-add-tile-icon-wrapper {
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 9999px;
+  border-width: 2px;
+  border-style: solid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.quick-launch-add-tile:hover .quick-launch-add-tile-icon-wrapper {
+  background-color: #F25C23;
+  color: white;
+}
+
+.quick-launch-add-tile-icon-wrapper.theme-light {
+  background-color: #FFFFFF;
+  border-color: #171717;
+  color: #171717;
+}
+
+.quick-launch-add-tile-icon-wrapper.theme-dark {
+  background-color: #18181B;
+  border-color: #3F3F46;
+  color: white;
+}
+
+.quick-launch-add-tile-text {
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.quick-launch-add-tile-text.theme-light {
+  color: #171717;
+}
+
+.quick-launch-add-tile-text.theme-dark {
+  color: #e5e5e5;
+}

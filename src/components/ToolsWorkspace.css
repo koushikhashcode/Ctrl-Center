@@ -1,0 +1,311 @@
+/* ==========================================
+   COMPONENT: ToolsWorkspace
+   Developer tools and utility links grid
+   ========================================== */
+
+.tools-workspace {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  position: relative;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+@media (min-width: 640px) {
+  .tools-workspace { padding: 1.5rem; }
+}
+
+.tools-workspace.theme-light { background-color: #FFFFFF; color: #171717; }
+.tools-workspace.theme-dark { background-color: #18181B; color: white; }
+
+/* Header */
+.tools-workspace-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 2px solid;
+  padding-bottom: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.tools-workspace-header.theme-light { border-color: #171717; }
+.tools-workspace-header.theme-dark { border-color: #3F3F46; }
+
+.tools-workspace-header-left {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.tools-workspace-icon-wrap {
+  background-color: #171717;
+  color: #F25C23;
+  padding: 0.375rem;
+  border-radius: 0.375rem;
+}
+
+.tools-workspace-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: #F25C23;
+}
+
+.tools-workspace-title {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+@media (min-width: 640px) {
+  .tools-workspace-title { font-size: 1.875rem; }
+}
+
+.tools-workspace-title.theme-light { color: #171717; }
+.tools-workspace-title.theme-dark { color: white; }
+
+/* Add button */
+.tools-workspace-add-btn {
+  padding: 0.375rem;
+  border-radius: 0.375rem;
+  border: 2px solid;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.tools-workspace-add-btn:hover {
+  background-color: #F25C23;
+  color: white;
+}
+
+.tools-workspace-add-btn.theme-light {
+  background-color: #F5F5F3;
+  border-color: #171717;
+  color: #171717;
+  box-shadow: 3px 3px 0px 0px #171717;
+}
+
+.tools-workspace-add-btn.theme-dark {
+  background-color: #27272A;
+  border-color: #3F3F46;
+  color: white;
+  box-shadow: 3px 3px 0px 0px #3F3F46;
+}
+
+.tools-workspace-add-icon {
+  width: 1rem;
+  height: 1rem;
+  stroke-width: 3;
+}
+
+/* Tools grid */
+.tools-workspace-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.625rem;
+  margin: 0.25rem 0;
+}
+
+@media (min-width: 640px) {
+  .tools-workspace-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* Tool card */
+.tool-card {
+  border: 2px solid;
+  border-radius: 0.75rem;
+  padding: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  min-height: 90px;
+  cursor: pointer;
+  position: relative;
+  touch-action: manipulation;
+  user-select: none;
+  transition: all 0.2s;
+}
+
+.tool-card.theme-light {
+  background-color: #F5F5F3;
+  border-color: #171717;
+  color: #171717;
+}
+
+.tool-card.theme-light:hover {
+  background-color: #F25C23;
+  color: white;
+}
+
+.tool-card.theme-dark {
+  background-color: #27272A;
+  border-color: #3F3F46;
+  color: white;
+}
+
+.tool-card.theme-dark:hover {
+  background-color: #F25C23;
+  color: white;
+}
+
+/* Tool badge */
+.tool-card-badge {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  font-size: 9px;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  background-color: #171717;
+  color: white;
+  padding: 0.125rem 0.375rem;
+  border-radius: 0.25rem;
+  border: 1px solid #3F3F46;
+}
+
+/* Tool icon */
+.tool-card-icon-wrap {
+  padding: 0.375rem;
+  border-radius: 0.25rem;
+  border: 1px solid;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.tool-card-icon-wrap.theme-light {
+  background-color: #FFFFFF;
+  border-color: #171717;
+  color: #171717;
+}
+
+.tool-card:hover .tool-card-icon-wrap {
+  background-color: #171717;
+  color: white;
+}
+
+.tool-card-icon-wrap.theme-dark {
+  background-color: #18181B;
+  border-color: #3F3F46;
+  color: white;
+}
+
+.tool-card-brand-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+/* Tool text */
+.tool-card-text {
+  width: 100%;
+  text-align: left;
+  margin-top: 0.5rem;
+}
+
+.tool-card-name {
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 0.75rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: block;
+}
+
+@media (min-width: 640px) {
+  .tool-card-name { font-size: 0.875rem; }
+}
+
+.tool-card-desc {
+  font-size: 10px;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  display: block;
+}
+
+.tool-card-desc.theme-light { color: rgba(23, 23, 23, 0.7); }
+.tool-card-desc.theme-dark { color: #d6d3d1; }
+.tool-card:hover .tool-card-desc { color: rgba(255, 255, 255, 0.8); }
+
+/* Add tool tile */
+.tools-workspace-add-tile {
+  border: 2px dashed;
+  border-radius: 0.75rem;
+  padding: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 90px;
+  gap: 0.25rem;
+  cursor: pointer;
+  touch-action: manipulation;
+  user-select: none;
+}
+
+.tools-workspace-add-tile:hover {
+  border-color: #F25C23;
+}
+
+.tools-workspace-add-tile.theme-light {
+  background-color: #F5F5F3;
+  border-color: #171717;
+  color: #171717;
+}
+
+.tools-workspace-add-tile.theme-light:hover {
+  background-color: #E8E8E5;
+}
+
+.tools-workspace-add-tile.theme-dark {
+  background-color: #27272A;
+  border-color: #3F3F46;
+  color: white;
+}
+
+.tools-workspace-add-tile.theme-dark:hover {
+  background-color: #3F3F46;
+}
+
+.tools-workspace-add-tile-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  stroke-width: 2.5;
+}
+
+.tools-workspace-add-tile:hover .tools-workspace-add-tile-icon {
+  color: #F25C23;
+}
+
+.tools-workspace-add-tile-label {
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+/* Footer */
+.tools-workspace-footer {
+  padding-top: 0.75rem;
+  border-top: 2px solid;
+  margin-top: 0.75rem;
+  text-align: right;
+}
+
+.tools-workspace-footer.theme-light { border-color: #171717; }
+.tools-workspace-footer.theme-dark { border-color: #3F3F46; }
+
+.tools-workspace-footer-text {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.tools-workspace-footer-text.theme-light { color: rgba(23, 23, 23, 0.7); }
+.tools-workspace-footer-text.theme-dark { color: #78716c; }

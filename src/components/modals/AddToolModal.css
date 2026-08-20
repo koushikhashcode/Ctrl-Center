@@ -1,0 +1,453 @@
+/* ==========================================
+   COMPONENT: AddToolModal
+   ========================================== */
+
+.tool-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background-color: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(4px);
+  overflow-y: auto;
+}
+
+.tool-modal-container {
+  width: 100%;
+  max-width: 32rem; /* max-w-lg */
+  border-radius: 1rem;
+  border: 2px solid;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  transition: all 0.3s;
+}
+
+.tool-modal-container.theme-light {
+  background-color: #FFFFFF;
+  border-color: #171717;
+  color: #171717;
+}
+
+.tool-modal-container.theme-dark {
+  background-color: #18181B;
+  border-color: #3F3F46;
+  color: white;
+}
+
+/* Header */
+.tool-modal-header {
+  padding: 1rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 2px solid;
+}
+
+@media (min-width: 640px) {
+  .tool-modal-header {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+.tool-modal-header.theme-light {
+  background-color: #171717;
+  color: white;
+  border-color: #171717;
+}
+
+.tool-modal-header.theme-dark {
+  background-color: #121214;
+  color: white;
+  border-color: #3F3F46;
+}
+
+.tool-modal-title-row {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+}
+
+.tool-modal-logo-icon-wrap {
+  padding: 0.375rem;
+  border-radius: 0.5rem;
+  background-color: #27272A;
+  border: 1px solid #3F3F46;
+  color: #F25C23;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tool-modal-header-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.tool-modal-title {
+  font-family: var(--font-heading);
+  font-size: 1.125rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+@media (min-width: 640px) {
+  .tool-modal-title { font-size: 1.25rem; }
+}
+
+.tool-modal-close-btn {
+  padding: 0.375rem;
+  color: #a8a29e;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tool-modal-close-btn:hover {
+  color: white;
+  background-color: #27272A;
+}
+
+.tool-modal-close-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+/* Form body */
+.tool-modal-form {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  max-height: 75vh;
+  overflow-y: auto;
+}
+
+@media (min-width: 640px) {
+  .tool-modal-form {
+    padding: 1.5rem;
+  }
+}
+
+.tool-modal-form-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+}
+
+@media (min-width: 640px) {
+  .tool-modal-form-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.tool-modal-col-span-2 {
+  grid-column: span 1 / span 1;
+}
+
+@media (min-width: 640px) {
+  .tool-modal-col-span-2 {
+    grid-column: span 2 / span 2;
+  }
+}
+
+.tool-modal-form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.tool-modal-form-label {
+  display: block;
+  font-size: 11px;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 0.25rem;
+}
+
+.tool-modal-form-label.theme-light { color: #171717; }
+.tool-modal-form-label.theme-dark { color: #d6d3d1; }
+
+.tool-modal-form-input {
+  width: 100%;
+  border: 2px solid;
+  border-radius: 0.75rem;
+  padding: 0.625rem;
+  font-weight: 600;
+  outline: none;
+  transition: all 0.2s;
+}
+
+.tool-modal-form-input:focus {
+  border-color: #F25C23;
+}
+
+.tool-modal-form-input.theme-light {
+  background-color: #F5F5F3;
+  border-color: #171717;
+  color: #171717;
+}
+
+.tool-modal-form-input.theme-light::placeholder {
+  color: #a8a29e;
+}
+
+.tool-modal-form-input.theme-dark {
+  background-color: #27272A;
+  border-color: #3F3F46;
+  color: white;
+}
+
+.tool-modal-form-input.theme-dark::placeholder {
+  color: #57534e;
+}
+
+/* URLs Section */
+.tool-modal-urls-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding-top: 0.25rem;
+}
+
+.tool-modal-urls-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.tool-modal-add-row-btn {
+  padding: 0.25rem 0.625rem;
+  border-radius: 0.5rem;
+  background-color: #F25C23;
+  color: white;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  cursor: pointer;
+  border: none;
+  box-shadow: 3px 3px 0px 0px #171717;
+  transition: all 0.2s;
+}
+
+.tool-modal-add-row-btn:hover {
+  background-color: #FF5A1F;
+}
+
+.tool-modal-add-row-icon {
+  width: 0.875rem;
+  height: 0.875rem;
+}
+
+/* List container */
+.tool-modal-rows-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+  max-height: 16rem;
+  overflow-y: auto;
+  padding-right: 0.25rem;
+}
+
+.tool-modal-row-card {
+  padding: 0.625rem;
+  border-radius: 0.75rem;
+  border: 2px solid;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.tool-modal-row-card.theme-light {
+  background-color: #F5F5F3;
+  border-color: #171717;
+}
+
+.tool-modal-row-card.theme-dark {
+  background-color: #27272A;
+  border-color: #3F3F46;
+}
+
+.tool-modal-row-index {
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 9999px;
+  background-color: #18181B;
+  color: #d6d3d1;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: 1px solid #3F3F46;
+}
+
+/* Input elements inside row cards */
+.tool-modal-row-input-name {
+  width: 33.333%;
+  border: 1px solid;
+  border-radius: 0.5rem;
+  padding: 0.375rem 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  outline: none;
+}
+
+.tool-modal-row-input-name.theme-light {
+  background-color: #FFFFFF;
+  border-color: #d6d3d1;
+  color: #171717;
+}
+
+.tool-modal-row-input-name.theme-dark {
+  background-color: #18181B;
+  border-color: #3F3F46;
+  color: white;
+}
+
+.tool-modal-row-input-name:focus {
+  border-color: #F25C23;
+}
+
+.tool-modal-row-input-url {
+  flex: 1;
+  border: 1px solid;
+  border-radius: 0.5rem;
+  padding: 0.375rem 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  outline: none;
+}
+
+.tool-modal-row-input-url.theme-light {
+  background-color: #FFFFFF;
+  border-color: #d6d3d1;
+  color: #171717;
+}
+
+.tool-modal-row-input-url.theme-dark {
+  background-color: #18181B;
+  border-color: #3F3F46;
+  color: white;
+}
+
+.tool-modal-row-input-url:focus {
+  border-color: #F25C23;
+}
+
+/* Trash row button */
+.tool-modal-row-delete-btn {
+  padding: 0.375rem;
+  color: #a8a29e;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.tool-modal-row-delete-btn.theme-light:hover {
+  color: #f43f5e;
+  background-color: #FFFFFF;
+}
+
+.tool-modal-row-delete-btn.theme-dark:hover {
+  color: #f43f5e;
+  background-color: #18181B;
+}
+
+.tool-modal-row-delete-icon {
+  width: 1rem;
+  height: 1rem;
+}
+
+/* Actions at the bottom */
+.tool-modal-actions {
+  padding-top: 1rem;
+  border-top: 2px solid;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.75rem;
+}
+
+.tool-modal-actions.theme-light { border-color: #171717; }
+.tool-modal-actions.theme-dark { border-color: #3f3f46; }
+
+.tool-modal-btn-cancel {
+  padding: 0.5rem 1rem;
+  border: 2px solid;
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 700;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.tool-modal-btn-cancel.theme-light {
+  border-color: #171717;
+  background-color: #F5F5F3;
+  color: #171717;
+}
+
+.tool-modal-btn-cancel.theme-light:hover {
+  background-color: #E8E8E5;
+}
+
+.tool-modal-btn-cancel.theme-dark {
+  border-color: #3F3F46;
+  background-color: #27272A;
+  color: #d6d3d1;
+}
+
+.tool-modal-btn-cancel.theme-dark:hover {
+  color: white;
+  background-color: #3F3F46;
+}
+
+.tool-modal-btn-submit {
+  padding: 0.5rem 1.25rem;
+  border: 2px solid #171717;
+  background-color: #F25C23;
+  color: white;
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 700;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  box-shadow: 3px 3px 0px 0px #171717;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+}
+
+.tool-modal-btn-submit:hover {
+  background-color: #FF5A1F;
+}
+
+.tool-modal-btn-submit-icon {
+  width: 1rem;
+  height: 1rem;
+  stroke-width: 2.5;
+}

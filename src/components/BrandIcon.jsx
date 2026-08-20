@@ -5,7 +5,7 @@
  * Renders the small logo icon seen in the top navigation.
  */
 import * as LucideIcons from 'lucide-react';
-export const BrandIcon = ({ name, className = 'w-6 h-6' })=>{
+export const BrandIcon = ({ name, className = 'brand-icon-default' })=>{
     const normalized = name.toLowerCase();
     // Custom SVG paths for iconic tech brands
     if (normalized.includes('linkedin')) {

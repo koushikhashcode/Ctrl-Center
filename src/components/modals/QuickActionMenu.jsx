@@ -6,6 +6,8 @@
  */
 import { motion, AnimatePresence } from 'motion/react';
 import { X, Search, ShieldCheck, Play, LayoutGrid, Zap } from 'lucide-react';
+import './SharedModals.css';
+
 export const QuickActionMenu = ({ isOpen, onClose, onAddLink, onAddPlaylist, onAddTool, onToggleVault, onOpenSearch })=>{
     const actions = [
         {
@@ -55,69 +57,36 @@ export const QuickActionMenu = ({ isOpen, onClose, onAddLink, onAddPlaylist, onA
         }
     ];
     return <AnimatePresence>
-      {isOpen && <motion.div initial={{
-        opacity: 0
-    }} animate={{
-        opacity: 1
-    }} exit={{
-        opacity: 0
-    }} transition={{
-        duration: 0.2
-    }} className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-xs" onClick={onClose}>
-          <motion.div initial={{
-        opacity: 0,
-        scale: 0.95,
-        y: 12
-    }} animate={{
-        opacity: 1,
-        scale: 1,
-        y: 0
-    }} exit={{
-        opacity: 0,
-        scale: 0.95,
-        y: 12
-    }} transition={{
-        type: 'spring',
-        stiffness: 420,
-        damping: 28
-    }} onClick={(e)=>e.stopPropagation()} data-lenis-prevent className="bg-[#FFFFFF] border-4 border-[#171717] rounded-2xl w-full max-w-md shadow-editorial-lg overflow-hidden">
+      {isOpen && <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }} className="modal-overlay" onClick={onClose}>
+          <motion.div initial={{ opacity: 0, scale: 0.95, y: 12 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.95, y: 12 }} transition={{ type: 'spring', stiffness: 420, damping: 28 }} onClick={(e)=>e.stopPropagation()} data-lenis-prevent className="modal-container max-w-md theme-light">
             { /* Header */ }
-            <div className="bg-[#171717] text-white px-6 py-4 flex items-center justify-between border-b-2 border-[#171717]">
+            <div className="modal-header theme-light">
               <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-full bg-[#F25C23] text-white flex items-center justify-center font-bold">
+                <div className="w-8 h-8 rounded-full bg-[#F25C23] text-white flex items-center justify-center font-bold" style={{width: '2rem', height: '2rem', borderRadius: '9999px', backgroundColor: '#F25C23', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold'}}>
                   +
                 </div>
-                <h3 className="font-heading text-xl font-bold tracking-wider">
+                <h3 className="modal-title">
                   QUICK COMMAND ACTION
                 </h3>
               </div>
-              <button onClick={onClose} className="p-1 text-stone-300 hover:text-white transition-colors cursor-pointer rounded hover:bg-white/10">
+              <button onClick={onClose} className="modal-close-btn" style={{color: '#a8a29e'}}>
                 <X className="w-5 h-5"/>
               </button>
             </div>
 
             { /* Action Items */ }
-            <div className="p-4 space-y-2 font-sans">
+            <div className="modal-body" style={{padding: '1rem', gap: '0.5rem'}}>
               {actions.map((act, i)=>{
         const Icon = act.icon;
-        return <motion.button key={i} onClick={act.onClick} whileTap={{
-            scale: 0.97
-        }} whileHover={{
-            scale: 1.01,
-            x: 2
-        }} transition={{
-            type: 'spring',
-            stiffness: 450,
-            damping: 25
-        }} className="w-full p-3.5 bg-[#F5F5F3] hover:bg-[#F25C23] hover:text-white border-2 border-[#171717] rounded-xl flex items-center gap-3 transition-all cursor-pointer shadow-editorial-sm group text-left touch-manipulation">
-                    <div className="p-2 rounded-lg bg-[#171717] text-[#F25C23] group-hover:bg-white group-hover:text-[#171717] transition-colors flex-shrink-0">
+        return <motion.button key={i} onClick={act.onClick} whileTap={{ scale: 0.97 }} whileHover={{ scale: 1.01, x: 2 }} transition={{ type: 'spring', stiffness: 450, damping: 25 }} className="quick-action-btn">
+                    <div className="quick-action-icon-wrap">
                       <Icon className="w-5 h-5"/>
                     </div>
                     <div>
-                      <h4 className="font-heading text-sm font-extrabold tracking-wide text-[#171717] group-hover:text-white">
+                      <h4 className="quick-action-title">
                         {act.title}
                       </h4>
-                      <p className="text-xs font-medium text-[#171717]/70 group-hover:text-white/80">
+                      <p className="quick-action-desc">
                         {act.desc}
                       </p>
                     </div>
